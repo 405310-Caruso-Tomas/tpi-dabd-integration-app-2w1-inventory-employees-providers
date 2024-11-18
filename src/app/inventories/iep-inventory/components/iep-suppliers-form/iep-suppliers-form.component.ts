@@ -268,7 +268,25 @@ function validarCUIT(): ValidatorFn {
       if (!tiposValidos.includes(tipo)) {
         return { cuilInvalido: true };
       }
+
+      // Calcula el dígito verificador
+      const multiplicadores = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2]; // Coeficientes para el cálculo
+      let suma = 0;
+
+      for (let i = 0; i < multiplicadores.length; i++) {
+        suma += parseInt(cuilLimpio[i], 10) * multiplicadores[i];
+      }
+
+      const resto = suma % 11;
+      const digitoCalculado = resto === 0 ? 0 : 11 - resto;
+      const digitoVerificador = parseInt(cuilLimpio[10], 10);
+
+      // Verifica si el dígito verificador es correcto
+      if (digitoCalculado !== digitoVerificador) {
+        return { cuilInvalido: true };
+      }
     }
-    return null; // Si todo está correcto, no hay error
+
+    return null; 
   };
 }
