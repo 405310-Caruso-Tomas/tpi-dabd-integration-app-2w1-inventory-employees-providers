@@ -537,7 +537,7 @@ applyFilter(): void {
 
     $('#productsList').on('click', '.botonDetalleEditar', (event) => {
       const id = $(event.currentTarget).data('id');
-      this.router.navigate(['main/inventories/new-product/' + id]);
+      this.router.navigate(['main/inventories/product-update/' + id]);
     });
 
     $('#productsList').on('click', '.delete-btn', (event) => {

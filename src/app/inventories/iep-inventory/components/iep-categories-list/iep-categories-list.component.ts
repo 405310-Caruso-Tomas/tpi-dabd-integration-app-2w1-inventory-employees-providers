@@ -12,6 +12,7 @@ import { UsersMockIdService } from '../../../common-services/users-mock-id.servi
 import { ProductService } from '../../services/product.service';
 import * as XLSX from 'xlsx';
 import { NgSelectModule } from '@ng-select/ng-select';
+import $ from 'jquery';
 
 declare var bootstrap: any; // Añadir esta declaración al principio
 @Component({
@@ -148,7 +149,6 @@ exportToExcel(): void {
     if (this.table) {
       this.table.destroy();
     }
-
     this.table = $('#categoryTable').DataTable({
        //Atributos de la tabla
        paging: true,

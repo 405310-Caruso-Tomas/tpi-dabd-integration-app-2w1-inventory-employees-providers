@@ -78,13 +78,11 @@ export class IepNuevoIngresoEgresoComponent implements OnInit {
     window.history.back()
   }
   onSubmit(){
-    console.log("ERRORESSSSS:")
    this.logErrorsEgreso()
    this.logErrorsFormulario()
    console.log("perrra")
    let dto: movementDto
    if(this.selectedType==="I"){
-    console.log("FORMULARIO I")
     console.log(this.formulario.value)
     dto= {
     amount: this.formulario.get('amount')?.value,
@@ -96,7 +94,6 @@ export class IepNuevoIngresoEgresoComponent implements OnInit {
     justification : this.formulario.get('justify')?.value
     }}
     else {
-      console.log("FORMULARIO E")
       console.log(this.formularioEgreso.value)
       dto ={
         amount: this.formularioEgreso.get('amount')?.value,
@@ -121,7 +118,7 @@ export class IepNuevoIngresoEgresoComponent implements OnInit {
         confirmButtonColor: '#3085d6'
       }).then(() => {
         this.formulario.reset()
-        this.goTo('/home/modification-stock-list')
+        this.goTo('/main/inventories/stock-movements-history')
       });
       console.log("PASO: ", response);
     },
