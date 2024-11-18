@@ -239,7 +239,7 @@ this.table.rows.add(filteredData).draw();
   }
 
   goTo(path: string) {
-    this.router.navigate([path]);
+    this.router.navigate(['/main/employees/' + path]);
   }
   exportToPdf(): void {
     const doc = new jsPDF();

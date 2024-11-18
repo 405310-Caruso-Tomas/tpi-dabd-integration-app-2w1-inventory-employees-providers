@@ -342,6 +342,7 @@ export class IEPFormPostEmployeesComponent implements OnInit {
 
     // Separa los componentes del CUIL
     const tipo = parseInt(cuilLimpio.substring(0, 2), 10);
+    const tipoAndDni = cuilLimpio.substring(0, 10);
     const dni = parseInt(cuilLimpio.substring(2, 10), 10);
     const digitoVerificador = parseInt(cuilLimpio.substring(10, 11), 10);
 
@@ -351,17 +352,17 @@ export class IEPFormPostEmployeesComponent implements OnInit {
         this.isValidCuilFinish= false
         return false;
     }
-    else {
+    /*else {
       this.isValidCuilFinish=true
-    }
+    }*/
     console.log("paso3")
     // Calcula el dígito verificador
-    /* const multiplicadores = [3, 2, 7, 6, 5, 4, 3, 2, 1]; // Último 1 es para el dígito verificador
+     const multiplicadores = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2]; // Último 1 es para el dígito verificador
     let suma = 0;
 
-    for (let i = 0; i < 10; i++) {
-        suma += parseInt(cuilLimpio[i], 10) * multiplicadores[i];
-    }
+    for (let i = 0; i < multiplicadores.length; i++) {
+      suma += parseInt(tipoAndDni[i], 10) * multiplicadores[i];
+  }
 
     const resto = suma % 11;
     const digitoCalculado = resto === 0 ? 0 : 11 - resto;
@@ -369,9 +370,10 @@ export class IEPFormPostEmployeesComponent implements OnInit {
     if( digitoCalculado != digitoVerificador){
       this.isValidCuilFinish = false
       return true
-    } */
+    } 
     console.log("paso3")
     // Verifica que el dígito verificador sea correcto
+    this.isValidCuilFinish = true;
     return true
 }
 
