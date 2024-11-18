@@ -48,7 +48,7 @@ export class IepSupplierUpdateComponent implements OnInit{
         discontinued: this.proveedorForm.value.discontinued
       };
   
-      this.supplierService.updateSupplier(supplierUpdate,this.userService.getUser().id).subscribe(
+      this.supplierService.updateSupplier(supplierUpdate).subscribe(
           {
         next: response=> {
           console.log(JSON.stringify(response))

@@ -92,6 +92,9 @@ export class IepProductComponent {
     }
   }
 
+
+  
+
   showProductCouldntBeFoundAlert() {
     Swal.fire({
       icon: 'error',
@@ -226,7 +229,7 @@ export class IepProductComponent {
     };
 
     console.log(JSON.stringify(mappedDto));
-    this.productService.updateProduct(mappedDto,this.userService.getUser().id).subscribe({
+    this.productService.updateProduct(mappedDto).subscribe({
       next: response => {
         this.successMessage = response.message;
         this.showSuccessAlert();
