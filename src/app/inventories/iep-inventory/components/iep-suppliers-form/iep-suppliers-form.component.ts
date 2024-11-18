@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { SuppliersService } from '../../services/suppliers.service';
 import { Router, RouterModule } from '@angular/router';
 import { iepBackButtonComponent } from '../../../common-components/iep-back-button/iep-back-button.component';
@@ -7,29 +15,36 @@ import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 import { debounceTime, distinctUntilChanged, max, switchMap } from 'rxjs';
 
-
 @Component({
   selector: 'app-iep-suppliers-form',
   standalone: true,
-  imports: [iepBackButtonComponent, ReactiveFormsModule, RouterModule, CommonModule],
+  imports: [
+    iepBackButtonComponent,
+    ReactiveFormsModule,
+    RouterModule,
+    CommonModule,
+  ],
   templateUrl: './iep-suppliers-form.component.html',
-  styleUrl: './iep-suppliers-form.component.css'
+  styleUrl: './iep-suppliers-form.component.css',
 })
 export class IepSuppliersFormComponent {
   proveedorForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private supplierService: SuppliersService, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private supplierService: SuppliersService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.proveedorForm = this.fb.group({
       name: ['', Validators.required],
-      cuit: ['', [
-        Validators.required]],
+      cuit: ['', [Validators.required, validarCUIT()]], 
       phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       email: ['', [Validators.required, Validators.email]],
       supplierType: ['OTHER', Validators.required],
       address: ['', Validators.required],
-      discontinued: [false]
+      discontinued: [false],
     });
 
     this.checkCuit();
@@ -37,68 +52,57 @@ export class IepSuppliersFormComponent {
     this.chechName();
   }
 
-
   onSubmit() {
-
-
-
-
     if (this.proveedorForm.valid) {
       const formData = this.proveedorForm.value;
       console.log(formData);
       this.supplierService.createSupplier(formData).subscribe((response) => {
         this.proveedorForm.reset();
         this.router.navigate(['/suppliers']);
-
       });
 
       const formAccess = {
         name: formData.name,
         cuil: formData.cuit,
         email: formData.email,
-
-      }
+      };
 
       this.supplierService.createSupplierAccess(formAccess).subscribe({
-
-        next: response => {
-          console.log(JSON.stringify(response))
+        next: (response) => {
+          console.log(JSON.stringify(response));
           Swal.fire({
             title: '¡Guardado!',
-            text: "Proveedor guardado con exito",
+            text: 'Proveedor guardado con exito',
             icon: 'success',
             confirmButtonText: 'Aceptar',
             showCancelButton: false,
-            confirmButtonColor: '#3085d6'
+            confirmButtonColor: '#3085d6',
           }).then(() => {
-            this.router.navigate(['/suppliers'])
+            this.router.navigate(['/suppliers']);
           });
-          ;
-          console.log("PASO: ", response);
+          console.log('PASO: ', response);
         },
-        error: error => {
-
+        error: (error) => {
           Swal.fire({
             title: 'Error',
-            text: "Error en el servidor intente nuevamente mas tarde",
+            text: 'Error en el servidor intente nuevamente mas tarde',
             icon: 'error',
             confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#3085d6'
+            confirmButtonColor: '#3085d6',
           });
 
-          console.log("error:" + error.error.message)
+          console.log('error:' + error.error.message);
           console.error(error);
-
-        }
-      })
+        },
+      });
     }
   }
 
-
-
   isFieldInvalid(field: string): boolean {
     const control = this.proveedorForm.get(field);
-    return control ? control.invalid && (control.touched || control.dirty) : false;
+    return control
+      ? control.invalid && (control.touched || control.dirty)
+      : false;
   }
   goBack() {
     window.history.back();
@@ -106,12 +110,12 @@ export class IepSuppliersFormComponent {
 
   cuitExists: boolean = false;
   checkCuit() {
-
-    this.proveedorForm.get('cuit')?.valueChanges
-      .pipe(
+    this.proveedorForm
+      .get('cuit')
+      ?.valueChanges.pipe(
         debounceTime(500),
         distinctUntilChanged(),
-        switchMap(cuit => {
+        switchMap((cuit) => {
           this.cuitExists = false;
           return this.supplierService.getSupplierByCuit(cuit);
         })
@@ -187,15 +191,15 @@ export class IepSuppliersFormComponent {
   }
     */
 
-
   emailExists: boolean = false;
 
   checkEmail() {
-    this.proveedorForm.get('email')?.valueChanges
-      .pipe(
+    this.proveedorForm
+      .get('email')
+      ?.valueChanges.pipe(
         debounceTime(500),
         distinctUntilChanged(),
-        switchMap(email => {
+        switchMap((email) => {
           this.emailExists = false;
           return this.supplierService.getSupplierByEmail(email);
         })
@@ -215,16 +219,16 @@ export class IepSuppliersFormComponent {
           console.error('Error al verificar el Email', error);
         }
       );
-
   }
 
   nameExists: boolean = false;
   chechName() {
-    this.proveedorForm.get('name')?.valueChanges
-      .pipe(
+    this.proveedorForm
+      .get('name')
+      ?.valueChanges.pipe(
         debounceTime(500),
         distinctUntilChanged(),
-        switchMap(name => {
+        switchMap((name) => {
           this.nameExists = false;
           return this.supplierService.getSupplierByName(name);
         })
@@ -244,7 +248,27 @@ export class IepSuppliersFormComponent {
           console.error('Error al verificar el Nombre', error);
         }
       );
-
   }
+}
 
+function validarCUIT(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (control.value) {
+      // Elimina guiones o espacios del CUIT
+      const cuilLimpio = control.value.replace(/[-\s]/g, "");
+
+      // Verifica que tenga exactamente 11 dígitos
+      if (!/^\d{11}$/.test(cuilLimpio)) {
+        return { cuilInvalido: true };
+      }
+
+      // Verifica que los primeros 2 dígitos sean un tipo válido (20, 23, 24, 27, 30, 33, 34)
+      const tipo = parseInt(cuilLimpio.substring(0, 2), 10);
+      const tiposValidos = [20, 23, 24, 27, 30, 33, 34];
+      if (!tiposValidos.includes(tipo)) {
+        return { cuilInvalido: true };
+      }
+    }
+    return null; // Si todo está correcto, no hay error
+  };
 }
