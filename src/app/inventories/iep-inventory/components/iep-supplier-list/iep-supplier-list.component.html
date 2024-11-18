@@ -233,31 +233,20 @@
         <table 
         class="table table-striped border border-4 rounded table-hover" id="suppliersTable">
         <thead class="table-light border border-4">
-            <tr>
-              <th>Razon social</th>
-              <th>Tipo proveedor</th>
-              <th>Direccion</th>
-              <th>Obra Social</th>
-              <th>Descripcion</th>
-              <th>Telefono</th>
-              <th>Email</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let supplier of filteredSuppliers">
-              <td>{{ supplier.name }}</td>
-              <td>{{ supplier.supplierType | supplierType }}</td>
-              <td>{{ supplier.address }}</td>
-              <td>{{ supplier.cuit }}</td>
-              <td>{{ supplier.description }}</td>
-              <td>{{ supplier.phoneNumber }}</td>
-              <td>{{ supplier.email }}</td>
-              <td>
-                <!-- Aquí irían los botones de acciones como editar y eliminar -->
-              </td>
-            </tr>
-          </tbody>
+          <tr>
+            <th>Estado</th>
+            <th>Cuit</th>
+            <th>Nombre</th>
+            <th>Tipo proveedor</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Las filas son manejadas dinámicamente por DataTables -->
+        </tbody>
         </table>
       </div>
     </div>

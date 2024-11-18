@@ -11,6 +11,10 @@ import { iepBackButtonComponent } from '../../../common-components/iep-back-butt
 import { SupplierTypePipe } from '../../pipes/supplier-type.pipe';
 import { NgSelectModule } from '@ng-select/ng-select';
 import Swal from 'sweetalert2';
+import $ from 'jquery';
+import 'datatables.net';
+import 'datatables.net-dt';
+import 'datatables.net-bs5';
 
 interface SelectedTypes {
   OUTSOURCED_SERVICE: boolean;
