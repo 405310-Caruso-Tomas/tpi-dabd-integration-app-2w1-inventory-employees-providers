@@ -6,9 +6,11 @@ import { IEPFormPostEmployeesComponent } from "./iep-employees/components/iep-fo
 import { IepListEmployeesComponent } from "./iep-employees/components/iep-list-employees/iep-list-employees.component";
 import { IepPerformancelistComponent } from "./iep-employees/components/iep-performancelist/iep-performancelist.component";
 import { IepPutEmployeesComponent } from "./iep-employees/components/iep-put-employees/iep-put-employees.component";
+import { IepPillowLaterArrivalConfigComponent } from "./iep-employees/components/iep-pillow-later-arrival-config/iep-pillow-later-arrival-config.component";
 
 export const EMPLOYEE_ROUTES: Routes = [
     { path: 'employees', component: IepListEmployeesComponent },
+    { path: 'pillow-late-arrival', component: IepPillowLaterArrivalConfigComponent },
     { path: "register-employee", component: IEPFormPostEmployeesComponent },
     { path: 'attention-call', component: IepAttentionCallComponent },
     { path: 'performance', component: IepPerformancelistComponent },
