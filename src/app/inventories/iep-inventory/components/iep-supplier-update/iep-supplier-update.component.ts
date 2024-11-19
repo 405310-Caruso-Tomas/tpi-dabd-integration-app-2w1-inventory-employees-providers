@@ -31,7 +31,7 @@ export class IepSupplierUpdateComponent implements OnInit{
       text: "Los datos se han actualizado correctamente.",
       confirmButtonText: "Aceptar" 
     }).then(() => {
-      this.router.navigate(['/home/suppliers']);
+      this.router.navigate(['/main/providers/suppliers']);
     });
 
 
