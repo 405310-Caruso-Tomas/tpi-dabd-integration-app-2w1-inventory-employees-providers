@@ -7,6 +7,7 @@ import { IepChartsInventoryComponent } from "./iep-inventory/components/iep-char
 import { IepProductComponent } from "./iep-inventory/components/iep-product/iep-product.component";
 import { IepNuevoIngresoEgresoComponent } from "./iep-inventory/components/iep-nuevo-ingreso-egreso/iep-nuevo-ingreso-egreso.component";
 import { IepSuppliersFormComponent } from "./iep-inventory/components/iep-suppliers-form/iep-suppliers-form.component";
+import { IepSupplierUpdateComponent } from "./iep-inventory/components/iep-supplier-update/iep-supplier-update.component";
 
 export const INVENTORY_ROUTES: Routes = [
 
@@ -22,6 +23,11 @@ export const INVENTORY_ROUTES: Routes = [
     { path: 'stock-movements-history', component: IepTableComponent },
     { path: 'stock-increase', component: IepNuevoIngresoEgresoComponent },
     { path: 'new-provider', component: IepSuppliersFormComponent },
+    {
+        path: "supplier-update/:id",
+        component: IepSupplierUpdateComponent,
+        title: "Modificar proveedor"
+      },
     { path: 'categories-list', component: IepCategoriesListComponent }, 
     { path: 'dashboard', component: IepChartsInventoryComponent }, 
 ];
