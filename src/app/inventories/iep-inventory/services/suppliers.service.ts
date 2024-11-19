@@ -47,7 +47,7 @@ export class SuppliersService {
     if (createdDatetime) {
       params = params.set('dateOfJoining', createdDatetime);
     }
-
+    
     return this.http.get<Supplier[]>(this.SUPPLIERS_URL, {
       params,
     });
@@ -83,6 +83,7 @@ export class SuppliersService {
   }
 
   getAll(): Observable<Supplier[]> {
+   
     return this.http.get<Supplier[]>(this.SUPPLIERS_URL + '/all');
   }
 
