@@ -25,14 +25,7 @@ export class IepSupplierUpdateComponent implements OnInit{
 
   onSubmit() {
 
-    Swal.fire({
-      icon: "success",
-      title: "Actualización Exitosa",
-      text: "Los datos se han actualizado correctamente.",
-      confirmButtonText: "Aceptar" 
-    }).then(() => {
-      this.router.navigate(['/main/providers/suppliers']);
-    });
+    
 
 
     if (this.proveedorForm.valid) {
@@ -60,7 +53,8 @@ export class IepSupplierUpdateComponent implements OnInit{
             showCancelButton: false,
             confirmButtonColor: '#3085d6'
           }).then(() => {
-            this.router.navigate(['/suppliers'])});
+            this.router.navigate(['/main/providers/suppliers'])
+          });
           console.log("PASO: ", response);
         },
         error: error => {
