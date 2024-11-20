@@ -126,7 +126,7 @@ export class IEPFormPostEmployeesComponent implements OnInit {
     this.invalidDate = false;
   }
 
-
+/*
   public validateCuil(){
     console.log("pre validando"+this.cuil)
     let rsta =  this.validarCUILFormato(this.cuil)
@@ -141,7 +141,6 @@ export class IEPFormPostEmployeesComponent implements OnInit {
             this.isValidCuil = !response;
             console.log(this.isValidCuil)
             this.validarCUILFormato(this.cuil)
-
 
     // Verificar cada control en el formulario y registrar errores
  //   Object.keys(form.controls).forEach(field => {
@@ -160,7 +159,7 @@ export class IEPFormPostEmployeesComponent implements OnInit {
     }
 
 
-  }
+  }*/
 
   public validateDni(){
 
@@ -253,6 +252,7 @@ export class IEPFormPostEmployeesComponent implements OnInit {
             this.postDto.charge=this.cargoSelected?.id
             this.postDto.userId=this.userService.getUser().id
 
+            console.log("Id user"+ this.postDto.userId)
             console.log("Antes del Post (formato JSON):", JSON.stringify(this.postDto, null, 2))
             this.createEmployee$ = this.serviceCombos.createProduct(this.postDto);
             console.log(this.createEmployee$);
