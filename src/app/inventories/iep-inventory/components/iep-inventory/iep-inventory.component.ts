@@ -411,7 +411,7 @@ applyFilter(): void {
         },
         {
           data: null,
-          title: 'Estado',
+          title: 'Estado', className: 'text-center',
           render: (data: any) => {
             const discontinued = data.discontinued;
             const isActive = data.stock > 0;
