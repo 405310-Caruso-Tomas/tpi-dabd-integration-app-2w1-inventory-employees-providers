@@ -24,11 +24,7 @@ export class IepSupplierUpdateComponent implements OnInit{
 
 
   onSubmit() {
-
-    
-
-
-    if (this.proveedorForm.valid) {
+    if (this.proveedorForm.valid && this.validateNonEquals()) {
       const supplierUpdate: Supplier = {
         id: this.id, 
         name: this.proveedorForm.value.name,
@@ -75,16 +71,41 @@ export class IepSupplierUpdateComponent implements OnInit{
       );
     }
   }
+
+  validateNonEquals():boolean{
+    if(this.supplierUpdateOrig?.name==this.proveedorForm.value.name &&
+      this.supplierUpdateOrig?.cuit==this.proveedorForm.value.cuit &&
+      this.supplierUpdateOrig?.address==this.proveedorForm.value.address &&
+      this.supplierUpdateOrig?.supplierType==this.proveedorForm.value.supplierType &&
+      this.supplierUpdateOrig?.description==this.proveedorForm.value.description &&
+      this.supplierUpdateOrig?.phoneNumber==this.proveedorForm.value.phoneNumber &&
+      this.supplierUpdateOrig?.email==this.proveedorForm.value.email &&
+      this.supplierUpdateOrig?.discontinued==this.proveedorForm.value.discontinued){
+        this.proveedorForm.invalid;
+        Swal.fire({
+          title: 'Error',
+          text: "No se realizaron cambios",
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+          confirmButtonColor: '#3085d6'
+        });
+        return false;
+      }
+      return true;
+  }
+
+
   
  
 
   supplierUpdate?:Supplier;
+  supplierUpdateOrig?:Supplier;
 
   ngOnInit(): void {
     this.proveedorForm = this.fb.group({
       name: ['', Validators.required],
       cuit: ['', Validators.required],
-      phoneNumber: ['', [Validators.required,Validators.pattern('^[0-9]*$')]],
+      phoneNumber: ['', [Validators.required,Validators.pattern('^[1-9]{10}$')]],
       email: ['', [Validators.required, Validators.email]],
       supplierType: ['', Validators.required],
       address: ['', Validators.required],
@@ -92,7 +113,8 @@ export class IepSupplierUpdateComponent implements OnInit{
       authorized: [false],
       discontinued:[false]
     });
-  
+
+    
     this.searchSupplier();
   }
   
@@ -103,6 +125,7 @@ export class IepSupplierUpdateComponent implements OnInit{
         .subscribe(
           supplier => {
             this.supplierUpdate = supplier;
+            this.supplierUpdateOrig = supplier;
             this.proveedorForm.patchValue({
               name: supplier.name,
               cuit: supplier.cuit,

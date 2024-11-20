@@ -170,7 +170,7 @@
                                             <div *ngIf="formularioEgreso.controls['amount'].invalid && formularioEgreso.controls['amount'].touched" class="text-danger">
                                                 <div *ngIf="formularioEgreso.controls['amount'].errors?.['required']"> Cantidad requerida</div>
                                                 <div *ngIf="formularioEgreso.controls['amount'].errors?.['min']"> Cantidad minima 1 </div>
-                                                <div *ngIf="formularioEgreso.controls['amount'].errors?.['insuficientStock']"> Stock del producto insuficiento </div>
+                                                <div *ngIf="formularioEgreso.controls['amount'].errors?.['insuficientStock']"> Stock del producto insuficiente </div>
                                                 <div *ngIf="formularioEgreso.controls['amount'].errors?.['noExistProduct']"> el producto ya no esta disponible </div>
 
 
