@@ -224,13 +224,6 @@ export class RoutingService {
           roles: ['SuperAdmin', 'Gerente general', 'Gerente inventario'],
         },
         {
-          icon: 'bi-arrow-left-right',
-          name: 'Movimientos',
-          title: 'Movimientos de Inventario',
-          route: 'main/inventories/warehouse-movements',
-          roles: ['SuperAdmin', 'Gerente general', 'Gerente inventario'],
-        },
-        {
           icon: 'bi-truck',
           name: 'Proveedores',
           title: 'Listado de Proveedores',

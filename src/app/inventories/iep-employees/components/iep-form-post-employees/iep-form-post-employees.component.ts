@@ -126,7 +126,7 @@ export class IEPFormPostEmployeesComponent implements OnInit {
     this.invalidDate = false;
   }
 
-
+/*
   public validateCuil(){
     console.log("pre validando"+this.cuil)
     let rsta =  this.validarCUILFormato(this.cuil)
@@ -141,18 +141,6 @@ export class IEPFormPostEmployeesComponent implements OnInit {
             this.isValidCuil = !response;
             console.log(this.isValidCuil)
             this.validarCUILFormato(this.cuil)
-
-
-    // Verificar cada control en el formulario y registrar errores
- //   Object.keys(form.controls).forEach(field => {
-   //   const control = form.controls[field];
-      
-   //   if (control.invalid) {
-   //       console.log(`Campo '${field}' inválido. Errores:`, control.errors);
-   //   }
-  //  });
-
-   
       }
        
             })
@@ -160,23 +148,18 @@ export class IEPFormPostEmployeesComponent implements OnInit {
     }
 
 
-  }
+  }*/
 
   public validateDni(){
-
     if(this.dni!=null&&this.dni!=undefined && this.documentType!=null&& this.documentType!=undefined){
-
       if(this.dni.length>7){
-
         this.validateDni$ = this.serviceCombos.validateDni(this.dni,this.documentType)
         this.validateDni$.subscribe({
           next: response => {
             this.isValidDni = !response;
           }
-            
             })
       }
-
     }
 
   }

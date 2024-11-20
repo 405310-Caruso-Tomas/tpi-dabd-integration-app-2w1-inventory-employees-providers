@@ -23,6 +23,7 @@ import { AuthService } from '../../../../users/users-servicies/auth.service';
 })
 export class IepNuevoIngresoEgresoComponent implements OnInit {
 
+  SwalMessage: string|undefined;
 
   formulario:FormGroup = new FormGroup({});
   formularioEgreso:FormGroup = new FormGroup({});
@@ -80,7 +81,6 @@ export class IepNuevoIngresoEgresoComponent implements OnInit {
   onSubmit(){
    this.logErrorsEgreso()
    this.logErrorsFormulario()
-   console.log("perrra")
    let dto: movementDto
    if(this.selectedType==="I"){
     console.log(this.formulario.value)
@@ -109,9 +109,19 @@ export class IepNuevoIngresoEgresoComponent implements OnInit {
     this.serviceMovment.createMovement(dto,this.serviceUsers.getUser().id).subscribe({
     next: response => {
       console.log(JSON.stringify(response))
+      this.SwalMessage = "Movimiento registrado con éxito."
+      this.showSuuccessMessage()
+      console.log("PASO: ", response);
+    },
+    error: error => {
+      this.handleErrors(error);
+    }})}
+
+
+    showSuuccessMessage(){
       Swal.fire({
         title: '¡Guardado!',
-        text: "Movimiento guardado con exito",
+        text: this.SwalMessage,
         icon: 'success',
         confirmButtonText: 'Aceptar',
         showCancelButton: false,
@@ -120,22 +130,35 @@ export class IepNuevoIngresoEgresoComponent implements OnInit {
         this.formulario.reset()
         this.goTo('/main/inventories/stock-movements-history')
       });
-      console.log("PASO: ", response);
-    },
-    error: error => {
-      
+    }
+
+    showErrorMessage(){
       Swal.fire({
         title: 'Error',
-        text: "Error en el servidor intente nuevamente mas tarde",
+        text: this.SwalMessage,
         icon: 'error',
         confirmButtonText: 'Aceptar',
         confirmButtonColor: '#3085d6'
       });
-   
-      console.log("error:"+error.error.message)
-      console.error(error);
-             
-    }})}
+    }
+
+
+  handleErrors(err: any) { 
+    console.error('Error:', err);
+    if(err.error.message=='400 Insufficient stock quantity'){
+      this.SwalMessage = "El stock al que intenta actualizar es menor al stock actual del producto."
+      this.showErrorMessage()
+    }else{
+      if(err.error.message=='404 Supplier not found'){
+        this.SwalMessage = "El proveedor ingresado no fue encontrado."
+        this.showErrorMessage();
+      }else if(err.error.message=='404 Product not found.'){
+        this.SwalMessage = "El producto ingresado no fue encontrado."
+        this.showErrorMessage();
+      }
+    }
+    return null;
+  }
 
   logErrorsFormulario() {
     Object.keys(this.formulario.controls).forEach(controlName => {

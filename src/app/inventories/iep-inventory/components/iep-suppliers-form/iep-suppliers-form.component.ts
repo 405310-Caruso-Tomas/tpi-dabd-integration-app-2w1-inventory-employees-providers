@@ -124,12 +124,9 @@ export class IepSuppliersFormComponent {
         (exists: boolean) => {
           this.cuitExists = exists;
           const cuitControl = this.proveedorForm.get('cuit');
-
           if (exists) {
             cuitControl?.setErrors({ cuitExists: true });
-          } else {
-            cuitControl?.setErrors(null);
-          }
+          } 
         },
         (error) => {
           console.error('Error al verificar el CUIT', error);
@@ -208,12 +205,9 @@ export class IepSuppliersFormComponent {
         (exists: boolean) => {
           this.emailExists = exists;
           const emailControl = this.proveedorForm.get('email');
-
           if (exists) {
             emailControl?.setErrors({ emailExists: true });
-          } else {
-            emailControl?.setErrors(null);
-          }
+          } 
         },
         (error) => {
           console.error('Error al verificar el Email', error);
@@ -264,8 +258,11 @@ function validarCUIT(): ValidatorFn {
 
       // Verifica que los primeros 2 dígitos sean un tipo válido (20, 23, 24, 27, 30, 33, 34)
       const tipo = parseInt(cuilLimpio.substring(0, 2), 10);
-      const tiposValidos = [20, 23, 24, 27, 30, 33, 34];
+      console.log(tipo);
+      const tiposValidos = [ 30, 33, 34];
+
       if (!tiposValidos.includes(tipo)) {
+        console.log("no es valido")
         return { cuilInvalido: true };
       }
 
