@@ -239,8 +239,6 @@ export class IEPFormPostEmployeesComponent implements OnInit {
             console.log("Antes del Post (formato JSON):", JSON.stringify(this.postDto, null, 2))
             this.createEmployee$ = this.serviceCombos.createProduct(this.postDto);
             console.log(this.createEmployee$);
-            
-        // Primero mostrar confirmación
   
             this.createEmployee$.subscribe({
               next: response => {

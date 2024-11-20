@@ -50,7 +50,6 @@ export class IepNuevoIngresoEgresoComponent implements OnInit {
       selectedArticule: new FormControl('',Validators.required),  
       selectedSupplier : new FormControl('',Validators.required),
       amount : new FormControl(0,[Validators.required,Validators.min(1)]),
-      priceUnit : new FormControl('',[Validators.required,Validators.min(1)]),
       justify : new FormControl('',Validators.required)
     });
 
