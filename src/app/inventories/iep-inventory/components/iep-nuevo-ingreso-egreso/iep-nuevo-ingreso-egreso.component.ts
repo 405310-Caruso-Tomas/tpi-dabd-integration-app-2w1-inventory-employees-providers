@@ -23,8 +23,9 @@ import { AuthService } from '../../../../users/users-servicies/auth.service';
 })
 export class IepNuevoIngresoEgresoComponent implements OnInit {
 
-  SwalMessage: string|undefined;
 
+  idUser=0
+  SwalMessage: string|undefined;
   formulario:FormGroup = new FormGroup({});
   formularioEgreso:FormGroup = new FormGroup({});
   selectedType: string = 'I';
@@ -119,7 +120,6 @@ export class IepNuevoIngresoEgresoComponent implements OnInit {
     error: error => {
       this.handleErrors(error);
     }})}
-
 
     showSuuccessMessage(){
       Swal.fire({

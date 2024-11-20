@@ -1,11 +1,4 @@
-import {
-  Component,
-  inject,
-  OnDestroy,
-  OnInit,
-  AfterViewInit,
-  NgModule,
-} from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, AfterViewInit, NgModule} from '@angular/core';
 import { debounceTime, min, Observable, Subscription } from 'rxjs';
 import { ProductService } from '../../services/product.service';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,10 +15,7 @@ import 'jspdf-autotable';
 import { IepStockIncreaseComponent } from '../iep-stock-increase/iep-stock-increase.component';
 import { Details } from '../../models/details';
 import { ProductCategory } from '../../models/product-category';
-import {
-  ProductXDetailDto,
-  ProductXDetailDto2,
-} from '../../models/product-xdetail-dto';
+import { ProductXDetailDto, ProductXDetailDto2,} from '../../models/product-xdetail-dto';
 import { CategoriaService } from '../../services/categoria.service';
 import { DetailServiceService } from '../../services/detail-service.service';
 import { EstadoService } from '../../services/estado.service';
@@ -412,6 +402,7 @@ applyFilter(): void {
         {
           data: null,
           title: 'Estado', className: 'text-center',
+
           render: (data: any) => {
             const discontinued = data.discontinued;
             const isActive = data.stock > 0;
@@ -723,7 +714,7 @@ applyFilter(): void {
 
   irAgregarProducto() {
     /* this.modalVisible = true; // Muestra el modal */
-    this.router.navigate(['home/new-product']);
+    this.router.navigate(['main/inventories/new-product']);
   }
 
   verificarMin(): boolean {

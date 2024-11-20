@@ -275,8 +275,8 @@ export class IepTableComponent implements OnInit, AfterViewInit, OnDestroy {
         { data: 'product', title: 'Artículo' }, // Columna de producto
         {data: 'supplier',title : 'Proveedor'},
 
-        { data: 'amount', title: 'Cantidad', className: 'text-end' }, // Columna de cantidad
-        { data: 'stockAfterModification', title: 'Stock Resultante', className: 'text-end',},
+        { data: 'amount', title: 'Cantidad' ,className: 'text-end'}, // Columna de cantidad
+        { data: 'stockAfterModification', title: 'Stock Resultante' },
         { data: 'description', title: 'Justificativo' }, 
         // Columna de justificativo
 

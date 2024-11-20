@@ -25,8 +25,6 @@ export class IepSupplierUpdateComponent implements OnInit{
 
   onSubmit() {
 
-    
-
 
     if (this.proveedorForm.valid) {
       const supplierUpdate: Supplier = {

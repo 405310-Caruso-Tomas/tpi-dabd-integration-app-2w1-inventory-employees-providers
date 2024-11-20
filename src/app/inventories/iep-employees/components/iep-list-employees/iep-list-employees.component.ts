@@ -16,7 +16,6 @@ import * as XLSX from 'xlsx';
 import Swal from 'sweetalert2';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-declare var DataTable: any;
 
 // Interfaz para los filtros
 interface EmployeeFilters {
@@ -30,7 +29,7 @@ interface EmployeeFilters {
 @Component({
   selector: 'app-iep-list-employees',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgSelectModule,RouterLink],
+  imports: [CommonModule, FormsModule, NgSelectModule, RouterLink],
   templateUrl: './iep-list-employees.component.html',
   styleUrls: ['./iep-list-employees.component.css'],
 })
@@ -600,7 +599,8 @@ this.table.rows.add(filteredData).draw();
                       ? `
                     <li class="dropdown-divider"></li>
                     <li><button class="dropdown-item eliminar-btn" data-empleado-id="${data.id}"
-                     data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</button></li>
+                    data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</button></li>
+
                   `
                       : ''
                   }
@@ -621,13 +621,13 @@ this.table.rows.add(filteredData).draw();
       event.preventDefault();
       const empleadoId = $(event.currentTarget).data('empleado-id');
       console.log(empleadoId);
-      this.router.navigate([`home/employee/attendance/${empleadoId}`]);
+      this.router.navigate([`main/employees/attendance/${empleadoId}`]);
     });
 
     $('#empleadosTable').on('click', '.consultar-desempeño', (event: any) => {
       event.preventDefault();
       const empleadoId = $(event.currentTarget).data('empleado-id');
-      this.router.navigate([`home/employee/performance/${empleadoId}`]); // Redirige al componente de desempeño con el ID del empleado
+      this.router.navigate([`main/employees/performance/${empleadoId}`]); // Redirige al componente de desempeño con el ID del empleado
     });
 
     
@@ -715,7 +715,7 @@ this.table.rows.add(filteredData).draw();
   editarEmpleado(id: any): void {
     //this.router.navigate(['employee/update/', id]);
     if (id) {
-      this.router.navigate(['/home/employee/update', id]);
+      this.router.navigate([`main/employees/employee/update/${id}`]);
     }
   }
 

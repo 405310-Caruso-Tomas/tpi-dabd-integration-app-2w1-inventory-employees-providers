@@ -5,7 +5,8 @@ import { StockAumentoService } from '../../services/stock-aumento.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { IepKpiComponent } from "../../../common-components/iep-kpi/iep-kpi.component";
+
+import { CustomKpiComponent } from "../../../../common/components/custom-kpi/custom-kpi.component";
 interface productosFaltantes{
   producto: string,
   cantidad: number
@@ -13,7 +14,7 @@ interface productosFaltantes{
 @Component({
   selector: 'app-iep-charts-inventory',
   standalone: true,
-  imports: [GoogleChartsModule, FormsModule, CommonModule, NgSelectModule, IepKpiComponent],
+  imports: [GoogleChartsModule, FormsModule, CommonModule, NgSelectModule, CustomKpiComponent],
   templateUrl: './iep-charts-inventory.component.html',
   styleUrl: './iep-charts-inventory.component.css'
 })

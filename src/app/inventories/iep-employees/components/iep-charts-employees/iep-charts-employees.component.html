@@ -71,18 +71,18 @@
         <!-- KPI LIMITE 5-->
         <div class="col-2 gap-2 d-flex flex-column justify-content-center">
             <!-- KPI 1 -->
-            <app-iep-kpi [amount]="kpiPresente" title="Asistencias"
+            <app-custom-kpi [amount]="kpiPresente" title="Asistencias"
             [customStyles]="{ 'background-color': '#b3f5bc' }" icon="bi-person-check"
-            ></app-iep-kpi>
+            ></app-custom-kpi>
             <!-- KPI 2 -->
-            <app-iep-kpi [amount]="kpiTarde" title="Llegadas tarde"
-            [customStyles]="{ 'background-color': '#f9ffb5' }" icon="bi-clock-history"></app-iep-kpi>
+            <app-custom-kpi [amount]="kpiTarde" title="Llegadas tarde"
+            [customStyles]="{ 'background-color': '#f9ffb5' }" icon="bi-clock-history"></app-custom-kpi>
             <!-- KPI 3 -->
-            <app-iep-kpi [amount]="kpiAusente" title="Inasistencias" subTitle="injustificadas"
-            [customStyles]="{ 'background-color': '#fa9189' }" icon="bi-x-circle"></app-iep-kpi>
+            <app-custom-kpi [amount]="kpiAusente" title="Inasistencias" subTitle="injustificadas"
+            [customStyles]="{ 'background-color': '#fa9189' }" icon="bi-x-circle"></app-custom-kpi>
             <!-- KPI 4 -->
-            <app-iep-kpi [amount]="kpiJustificado" title="Inasistencias" subTitle="justificadas"
-            [customStyles]="{ 'background-color': '#d1bdff' }" icon="bi-file-earmark-check"></app-iep-kpi>
+            <app-custom-kpi [amount]="kpiJustificado" title="Inasistencias" subTitle="justificadas"
+            [customStyles]="{ 'background-color': '#d1bdff' }" icon="bi-file-earmark-check"></app-custom-kpi>
         </div>
         <div class="col-10">
             <div class="row mb-2">

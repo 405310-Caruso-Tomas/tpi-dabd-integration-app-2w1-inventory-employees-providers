@@ -8,12 +8,12 @@ import { EmpListadoEmpleados } from '../../Models/emp-listado-empleados';
 import { ListadoDesempeñoService } from '../../services/listado-desempeño.service';
 import { WakeUpCallDetail } from '../../Models/listado-desempeño';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { IepKpiComponent } from "../../../common-components/iep-kpi/iep-kpi.component";
+import { CustomKpiComponent } from "../../../../common/components/custom-kpi/custom-kpi.component";
 
 @Component({
   selector: 'app-iep-charts-employees',
   standalone: true,
-  imports: [GoogleChartsModule, CommonModule, FormsModule, NgSelectModule, IepKpiComponent],
+  imports: [GoogleChartsModule, CommonModule, FormsModule, NgSelectModule, CustomKpiComponent],
   templateUrl: './iep-charts-employees.component.html',
   styleUrl: './iep-charts-employees.component.css'
 })

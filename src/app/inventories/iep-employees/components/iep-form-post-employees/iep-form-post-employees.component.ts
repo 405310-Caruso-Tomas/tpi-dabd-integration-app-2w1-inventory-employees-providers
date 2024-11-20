@@ -17,7 +17,7 @@ import { AuthService } from '../../../../users/users-servicies/auth.service';
 @Component({
   selector: 'app-iep-form-post-employees',
   standalone: true,
-  imports: [FormsModule, CommonModule,NgSelectModule,RouterLink],
+  imports: [FormsModule, CommonModule, NgSelectModule, RouterLink],
   templateUrl: './iep-form-post-employees.component.html',
   styleUrl: './iep-form-post-employees.component.css',
 })
@@ -141,13 +141,18 @@ export class IEPFormPostEmployeesComponent implements OnInit {
             this.isValidCuil = !response;
             console.log(this.isValidCuil)
             this.validarCUILFormato(this.cuil)
+    // Verificar cada control en el formulario y registrar errores
+ //   Object.keys(form.controls).forEach(field => {
+   //   const control = form.controls[field];
+      
+   //   if (control.invalid) {
+   //       console.log(`Campo '${field}' inválido. Errores:`, control.errors);
+   //   }
+  //  });
       }
        
             })
-
     }
-
-
   }*/
 
   public validateDni(){
@@ -236,6 +241,7 @@ export class IEPFormPostEmployeesComponent implements OnInit {
             this.postDto.charge=this.cargoSelected?.id
             this.postDto.userId=this.userService.getUser().id
 
+            console.log("Id user"+ this.postDto.userId)
             console.log("Antes del Post (formato JSON):", JSON.stringify(this.postDto, null, 2))
             this.createEmployee$ = this.serviceCombos.createProduct(this.postDto);
             console.log(this.createEmployee$);
