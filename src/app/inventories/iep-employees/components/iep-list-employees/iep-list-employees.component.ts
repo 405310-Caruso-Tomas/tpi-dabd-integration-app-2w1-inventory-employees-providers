@@ -4,7 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { FormsModule, NgSelectOption } from '@angular/forms';
-
+import $, { param } from 'jquery';
 import { EmpListadoEmpleados } from '../../Models/emp-listado-empleados';
 import { EmpListadoAsistencias } from '../../Models/emp-listado-asistencias';
 import { EmployeePerformance } from '../../Models/listado-desempeño';
@@ -16,7 +16,6 @@ import * as XLSX from 'xlsx';
 import Swal from 'sweetalert2';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-declare var $: any;
 declare var DataTable: any;
 
 // Interfaz para los filtros
@@ -600,7 +599,8 @@ this.table.rows.add(filteredData).draw();
                     puedeEliminar
                       ? `
                     <li class="dropdown-divider"></li>
-                    <li><button class="dropdown-item eliminar-btn" data-empleado-id="${data.id}">Eliminar</button></li>
+                    <li><button class="dropdown-item eliminar-btn" data-empleado-id="${data.id}"
+                     data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</button></li>
                   `
                       : ''
                   }
@@ -647,7 +647,6 @@ this.table.rows.add(filteredData).draw();
     // Obtener el ID del empleado al que se hace clic
     this.empleadoIdToDelete = $(event.currentTarget).data('empleado-id');
     // Mostrar el modal
-    $('#deleteModal').modal('show');
   });
 
     // Event handler para el botón de eliminar

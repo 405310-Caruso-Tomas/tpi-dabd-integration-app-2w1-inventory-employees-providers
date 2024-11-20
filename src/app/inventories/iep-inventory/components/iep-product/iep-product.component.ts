@@ -207,6 +207,7 @@ export class IepProductComponent {
         },
         complete: () => {
           console.log('Petición completada');
+          
         }
       });
   }
@@ -232,6 +233,7 @@ export class IepProductComponent {
         this.showUpdateSuccessAlert();
         console.log("PASO: ", response);
         form.reset();
+        this.router.navigate(['/main/inventories/inventory']);
        
       },
       error: error => {

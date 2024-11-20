@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ChargeResponse } from '../../Models/charge-response';
 import { ChargeService } from '../../services/charge.service';
 import { jsPDF } from 'jspdf';
+import $ from 'jquery';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
 import Swal from 'sweetalert2';
