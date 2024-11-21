@@ -82,8 +82,8 @@ loadAddressData(): void {
       this.calle = data.street;
       this.dpto = data.apartment || '';
       this.piso = data.floor || '';
-      this.provinciaSelect = data.city;
-      this.localidadSelect = data.locality;
+      this.provinciaSelect = this.provincias.find(p => p.nombre === data.city);
+      this.localidadSelect = this.provinciaSelect?.ciudades.find(l => l.nombre === data.locality);
       this.numeroCalle = data.number_street;
       this.codigoPostal = data.postal_code;
       
