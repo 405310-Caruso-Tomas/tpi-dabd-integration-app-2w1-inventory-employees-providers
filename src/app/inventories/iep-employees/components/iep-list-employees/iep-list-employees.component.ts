@@ -423,20 +423,30 @@ this.table.rows.add(filteredData).draw();
     const empSubscription = this.empleadoService.getEmployees().subscribe({
       next: (empleados) => {
         this.Empleados = empleados;
-        console.log('Empleados:', this.Empleados);
+        
+        // Añade estos logs de depuración
+        console.log('Empleados con detalles completos:', empleados.map(emp => ({
+          id: emp.id,
+          fullName: emp.fullName,
+          active: emp.active,
+          license: emp.license
+        })));
+
         this.ventana = 'Informacion';
+        
         // Obtener posiciones únicas
         this.uniquePositions = [
           ...new Set(empleados.map((emp) => emp.position)),
         ].sort();
-        //cargar estados unicos, en caso de que sea activo, validar si esta en licencia
-        this.uniqueStates = [
-          ...new Set(
-            empleados.map((emp) =>
-              emp.active ? (emp.license ? 'Licencia' : 'Activo') : 'Inactivo'
-            )
-          ),
-        ].sort();
+        
+        // Depuración adicional para estados
+        const estadosMapeados = empleados.map((emp) => 
+          emp.active ? (emp.license ? 'Licencia' : 'Activo') : 'Inactivo'
+        );
+        
+        console.log('Mapeo de estados:', estadosMapeados);
+        
+        this.uniqueStates = [...new Set(estadosMapeados)].sort();
 
         // Guardar el filtro actual si existe
         const currentFilter = this.positionFilter;
@@ -447,6 +457,7 @@ this.table.rows.add(filteredData).draw();
         // Actualizar el combobox y restaurar el filtro
         setTimeout(() => {
           this.updatePositionFilter();
+          this.updateStateFilter(); // Asegúrate de actualizar también los filtros de estado
           if (currentFilter) {
             this.positionFilter = currentFilter;
             this.applyFilters();
@@ -456,7 +467,7 @@ this.table.rows.add(filteredData).draw();
       error: (err) => console.error('Error al cargar empleados:', err),
     });
     this.subscriptions.push(empSubscription);
-  }
+}
 
   loadDesempeno(): void {
     const start = new Date(this.startDate);
@@ -510,18 +521,23 @@ this.table.rows.add(filteredData).draw();
       order: [[0, 'asc']], // Ordenar por fecha de forma descendente
       columns: [
         {
-          data: 'active',
+          data: null,
           title: 'Estado',
           className: 'align-middle text-center',
-          render: (data: boolean, type: any, row: any) => {
-            // Si el empleado está activo, valida la clave 'license' y si es true, retorna "Licencia"
-            if (data) {
-              return row.license
-                ? '<span class="badge border rounded-pill text-bg-yellow">Licencia</span>'
-                : '<span class="badge border rounded-pill text-bg-green">Activo</span>';
+          render: (data: any, type: any, row: any) => {
+            console.log('Row:', row);
+            if (row.active === false) {
+                
+                return '<span class="badge border rounded-pill text-bg-red">Inactivo</span>';
             }
-            return '<span class="badge border rounded-pill text-bg-red">Inactivo</span>';
-          },
+
+            if (row.active === true && row.license === true) {
+              
+                return '<span class="badge border rounded-pill text-bg-yellow">Licencia</span>';
+            }
+
+            return '<span class="badge border rounded-pill text-bg-green">Activo</span>';
+        },
         },
         {
           data: 'fullName',
@@ -559,7 +575,7 @@ this.table.rows.add(filteredData).draw();
         {
           data: 'salary',
           title: 'Salario',
-          className: 'align-middle',
+          className: 'align-left',
           render: (data: number | bigint) => {
             let formattedAmount = new Intl.NumberFormat('es-AR', {
               minimumFractionDigits: 2,
