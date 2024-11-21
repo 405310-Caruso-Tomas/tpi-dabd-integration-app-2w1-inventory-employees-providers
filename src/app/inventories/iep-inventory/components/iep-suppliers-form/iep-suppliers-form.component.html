@@ -195,7 +195,8 @@
             <ng-container *ngIf="proveedorForm.get('email')?.errors?.['required']">
               Este campo es requerido.
             </ng-container>
-            <ng-container *ngIf="proveedorForm.get('email')?.errors?.['email']">
+            <ng-container *ngIf="proveedorForm.get('email')?.errors?.['email'] || 
+            proveedorForm.get('email')?.errors?.['emailDomain']">
               Introduzca un Email válido.
             </ng-container>
             <ng-container *ngIf="emailExists">

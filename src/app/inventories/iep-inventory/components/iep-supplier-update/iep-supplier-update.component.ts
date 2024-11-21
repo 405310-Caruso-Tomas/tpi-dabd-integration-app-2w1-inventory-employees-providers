@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
-import { ProvidersService } from '../../services/providers.service';
 import { SuppliersService } from '../../services/suppliers.service';
 import { Supplier } from '../../models/suppliers';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { error } from 'jquery';
 import Swal from 'sweetalert2';
-import { UserService } from '../../../../users/users-servicies/user.service';
 import { AuthService } from '../../../../users/users-servicies/auth.service';
 
 @Component({
@@ -72,6 +69,16 @@ export class IepSupplierUpdateComponent implements OnInit{
     }
   }
 
+
+  emailDomainValidator(control: AbstractControl) {
+    const email = control.value;
+    if (email && email.endsWith('.com')) {
+      return null; 
+    } else {
+      return { emailDomain: true }; 
+    }
+  }
+
   validateNonEquals():boolean{
     if(this.supplierUpdateOrig?.name==this.proveedorForm.value.name &&
       this.supplierUpdateOrig?.cuit==this.proveedorForm.value.cuit &&
@@ -106,7 +113,7 @@ export class IepSupplierUpdateComponent implements OnInit{
       name: ['', Validators.required],
       cuit: ['', Validators.required],
       phoneNumber: ['', [Validators.required,Validators.pattern('^[1-9]{10}$')]],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email,this.emailDomainValidator]],
       supplierType: ['', Validators.required],
       address: ['', Validators.required],
       createdUser: [0],
