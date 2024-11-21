@@ -40,7 +40,8 @@ export class IepSuppliersFormComponent {
     this.proveedorForm = this.fb.group({
       name: ['', Validators.required],
       cuit: ['', [Validators.required, validarCUIT()]], 
-      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      
+      phoneNumber: ['', [Validators.required, Validators.pattern('^[1-9]{10}$')]],
       email: ['', [Validators.required, Validators.email]],
       supplierType: ['OTHER', Validators.required],
       address: ['', Validators.required],
@@ -134,59 +135,6 @@ export class IepSuppliersFormComponent {
       );
   }
 
-  /* isValidCuilFinish: boolean = false;
-
-  validarCUITFormato(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (!control.value) {
-        return null;
-      }
-  
-      const cuit = control.value.toString().trim();
-      
-      // Validar ÚNICAMENTE el formato con guiones (XX-XXXXXXXX-X)
-      const formatoConGuiones = /^\d{2}-\d{8}-\d{1}$/;
-      
-      if (!formatoConGuiones.test(cuit)) {
-        return {
-          invalidCUIT: 'El formato debe ser XX-XXXXXXXX-X (incluyendo los guiones)'
-        };
-      }
-  
-      // Eliminar guiones para la validación del dígito verificador
-      const cuitLimpio = cuit.replace(/-/g, '');
-      
-      // Validar tipo de CUIT
-      const tipo = parseInt(cuitLimpio.substring(0, 2), 10);
-      const tiposValidos = [20, 23, 24, 27, 30, 33, 34];
-      if (!tiposValidos.includes(tipo)) {
-        return {
-          invalidCUIT: 'El tipo de CUIT no es válido (debe comenzar con: 20, 23, 24, 27, 30, 33 o 34)'
-        };
-      }
-  
-      // Validar dígito verificador
-      const multiplicadores = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2];
-      const digitoVerificador = parseInt(cuitLimpio.charAt(10), 10);
-  
-      let suma = 0;
-      for (let i = 0; i < 10; i++) {
-        suma += parseInt(cuitLimpio.charAt(i), 10) * multiplicadores[i];
-      }
-  
-      let resto = suma % 11;
-      let digitoCalculado = resto === 0 ? 0 : 11 - resto;
-  
-      if (digitoCalculado !== digitoVerificador) {
-        return {
-          invalidCUIT: 'El dígito verificador no es válido'
-        };
-      }
-  
-      return null;
-    };
-  }
-    */
 
   emailExists: boolean = false;
 

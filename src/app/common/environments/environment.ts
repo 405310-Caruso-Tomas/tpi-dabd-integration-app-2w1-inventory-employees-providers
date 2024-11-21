@@ -22,7 +22,7 @@
   export const environment = {
     production: false,
     services: {
-      accesses: 'http://2w1-villadelcondor.dynns.com:8080/accesses',
+      accesses: 'http://localhost:8090',
       addresses: 'http://2w1-villadelcondor.dynns.com:8080/addresses',
       complaints: 'http://2w1-villadelcondor.dynns.com:8080/complaints',
       contacts: 'http://2w1-villadelcondor.dynns.com:8080/contacts',
@@ -30,7 +30,7 @@
       expenseGeneration: 'http://2w1-villadelcondor.dynns.com:8080/expense-generation',
       expensesManager: 'http://2w1-villadelcondor.dynns.com:8080/expenses-manager',
       fileManager: 'http://2w1-villadelcondor.dynns.com:8080/file-manager',
-      inventory: 'http://2w1-villadelcondor.dynns.com:8080/inventory',
+      inventory: 'http://localhost:9011',
       mercadoPago: 'http://2w1-villadelcondor.dynns.com:8080/mercado-pago-service',
       notifications: 'http://2w1-villadelcondor.dynns.com:8080/notifications',
       ownersAndPlots: 'http://2w1-villadelcondor.dynns.com:8080/owners-and-plots',
