@@ -26,10 +26,13 @@
       <div class="col-md-6">
         <div class="mb-3">
           <label class="form-label">Teléfono</label>
-          <input type="text" formControlName="phoneNumber" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('phoneNumber')}"/>
+          <input type="text" formControlName="phoneNumber" class="form-control" [ngClass]="{'is-invalid': isFieldInvalid('phoneNumber'),
+          'is-valid': proveedorForm.get('phoneNumber')?.valid && proveedorForm.get('phoneNumber')?.touched
+          }"/>
           <div *ngIf="isFieldInvalid('phoneNumber')" class="invalid-feedback">
-            Debe ingresar un número válido.
+            La entrada no es válida. Ingrese el número con la característica sin el 0 y sin el 15
           </div>
+
         </div>
       </div>
 
