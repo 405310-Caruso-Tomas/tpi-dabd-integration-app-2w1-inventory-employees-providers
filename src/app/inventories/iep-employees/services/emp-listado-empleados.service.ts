@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { EmpListadoEmpleados, Employee } from '../Models/emp-listado-empleados';
+import { map, Observable, Subject } from 'rxjs';
+import { ContactConsDTO, EmpListadoEmpleados, Employee } from '../Models/emp-listado-empleados';
 import { EmpListadoAsistencias } from '../Models/emp-listado-asistencias';
 import { EmpPutEmployees } from '../Models/emp-put-employees';
 import { environment } from '../../../common/environments/environment';
@@ -12,9 +12,20 @@ import { EmpPutEmployeesResponse } from '../Models/EmpPutEmployeesResponse';
 })
 export class EmpListadoEmpleadosService {
   private readonly EMPLOYEE_BASE_URL = environment.services.employees ; // URL base del servidor
+  private readonly CONTACT_BASE_URL = environment.services.contacts; // URL base del servidor
+  private readonly ADDRESS_BASE_URL = environment.services.addresses; // URL base del servidor
+
   private _refresh$ = new Subject<void>();
 
   constructor(private http: HttpClient) {}
+
+    getContactById(id: number) :Observable<any> {
+    return this.http.get<any>(`${this.CONTACT_BASE_URL}/contact/search?userId=${id}`);
+  }
+
+  getContactById2(id: string) :Observable<any> {
+    return this.http.get<any>(`${this.CONTACT_BASE_URL}/contact/search?userId=${id}`);
+  }
 
   // Getter para acceder al Subject de refresh
   get refresh$(): Observable<void> {
@@ -36,6 +47,12 @@ export class EmpListadoEmpleadosService {
   getEmployeeById2(id: number): Observable<EmpPutEmployeesResponse> {
     return this.http.get<EmpPutEmployeesResponse>(
       `${this.EMPLOYEE_BASE_URL}/employees/employeeById?id=${id}`
+    );
+  }
+
+  getAdressById(id: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.ADDRESS_BASE_URL}/address/${id}`
     );
   }
 

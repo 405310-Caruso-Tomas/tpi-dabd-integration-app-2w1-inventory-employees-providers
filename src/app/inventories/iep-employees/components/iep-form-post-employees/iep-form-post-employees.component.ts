@@ -78,7 +78,7 @@ export class IEPFormPostEmployeesComponent implements OnInit {
   mail: string = '';
   calle: string = '';
   numeroCalle: number = 0;
-  piso: number = 0;
+  piso?: number = undefined;
   dpto: string = '';
   codigoPostal: string = '';
   salario?: number;
@@ -117,8 +117,8 @@ export class IEPFormPostEmployeesComponent implements OnInit {
   isValidCuilFinish: boolean = true;
 
   cambio() {
-    console.log("Lunes:", this.lunes); // Debería mostrar true o false
-    console.log("Martes:", this.martes); // Debería mostrar true o false
+    console.log("Lunes:", this.lunes); 
+    console.log("Martes:", this.martes); 
 }
 
  
@@ -135,7 +135,6 @@ export class IEPFormPostEmployeesComponent implements OnInit {
       this.invalidDate = selectedDate < today;
       return;
     }
-    // Si la fecha seleccionada es anterior a la actual, setea `isInvalidDate` en true
     this.invalidDate = false;
   }
 

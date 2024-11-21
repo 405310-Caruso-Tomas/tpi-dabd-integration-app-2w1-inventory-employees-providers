@@ -21,6 +21,7 @@ export interface EmpPutEmployeesResponse {
     startTime: number[];  // [hour, minute]
     endTime: number[];   // formato: "HH:mm:ss"
     supplierId: null | number; 
+    addressId?: number;
   }
   interface ChargeResponse {
     id: number;
