@@ -72,7 +72,8 @@ export class IepSupplierUpdateComponent implements OnInit{
 
   emailDomainValidator(control: AbstractControl) {
     const email = control.value;
-    if (email && email.endsWith('.com')) {
+    if (email && email.endsWith('.com') || email.endsWith('.com.ar') || email.endsWith('.net') || 
+    email.endsWith('.mx') || email.endsWith('.org') || email.endsWith('.gov') || email.endsWith('.edu')) {
       return null; 
     } else {
       return { emailDomain: true }; 

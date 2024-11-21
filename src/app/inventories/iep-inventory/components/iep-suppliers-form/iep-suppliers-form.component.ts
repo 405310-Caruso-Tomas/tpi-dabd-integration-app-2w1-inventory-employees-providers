@@ -42,7 +42,8 @@ export class IepSuppliersFormComponent {
 
   emailDomainValidator(control: AbstractControl) {
     const email = control.value;
-    if (email && email.endsWith('.com')) {
+    if (email && email.endsWith('.com') || email.endsWith('.com.ar') || email.endsWith('.net') || 
+    email.endsWith('.mx') || email.endsWith('.org') || email.endsWith('.gov') || email.endsWith('.edu')) {
       return null; 
     } else {
       return { emailDomain: true }; 
@@ -65,7 +66,6 @@ export class IepSuppliersFormComponent {
       this.supplierService.createSupplierAccess(formAccess).pipe(
         switchMap(response => {
           console.log( "Proveedor cargado: " +JSON.stringify(response))
-
           return this.supplierService.createSupplier(formData)
         }),
         catchError(error => {
