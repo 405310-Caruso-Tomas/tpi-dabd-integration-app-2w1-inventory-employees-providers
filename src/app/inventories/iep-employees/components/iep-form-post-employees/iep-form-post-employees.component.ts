@@ -122,6 +122,11 @@ export class IEPFormPostEmployeesComponent implements OnInit {
 }
 
  
+dniChange(): void {
+  if(this.documentType === DocumentTypeEnum.DNI){
+    this.dni = this.cuil?.substring(3, 11);
+  }
+}
 
   public validateDate() {
     if (this.startTimeContract != null) {
@@ -459,7 +464,6 @@ export class IEPFormPostEmployeesComponent implements OnInit {
    this.loadProvincias();
    this.loadCharges();
    console.log(this.provincias);
-   
   }
 
     ERROR_MESSAGES = {
