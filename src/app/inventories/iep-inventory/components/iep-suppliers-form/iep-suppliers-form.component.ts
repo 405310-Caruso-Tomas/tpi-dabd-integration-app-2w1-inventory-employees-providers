@@ -52,12 +52,11 @@ export class IepSuppliersFormComponent {
         cuil: formData.cuit,
         email: formData.email,
       }
-
-      this.supplierService.createSupplierAccess(formAccess).pipe(
+      this.supplierService.createSupplier(formData).pipe(
         switchMap(response => {
           console.log( "Proveedor cargado: " +JSON.stringify(response))
-
-          return this.supplierService.createSupplier(formData)
+          
+          return this.supplierService.createSupplierAccess(formAccess)
         }),
         catchError(error => {
           console.error("Error en el flujo:", error);

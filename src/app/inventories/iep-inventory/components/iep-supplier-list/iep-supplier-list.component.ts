@@ -360,7 +360,7 @@ export class IepSupplierListComponent implements AfterViewInit {
               return `<span class="badge border rounded-pill" style="background-color: ${colorClass};">${text}</span>`;
             },
           },
-          { data: 'cuit', title: 'Cuit' },
+          { data: 'cuit', title: 'Cuit', width: '150px'  },
           { data: 'name', title: 'Nombre' },
           {
             data: 'supplierType',
